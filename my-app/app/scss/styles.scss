@@ -1,0 +1,10 @@
+$color: blue;
+$large: 2em;
+
+body {
+  background-color : $color;
+  font-size:12px;
+  border-radius: 4px;
+  color:#fff;
+}
+h1{font-size: $large;}
