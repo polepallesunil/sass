@@ -5,7 +5,7 @@ var gulp = require('gulp');
     minifycss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     gutil = require('gulp-util')
-    autoprefixer = require('gulp-autoprefixer'),
+    server = require('gulp-express'),
     livereload = require('gulp-livereload');
 
 
@@ -37,29 +37,33 @@ gulp.task('styles', function () {
     .src(cssInput)
     .pipe(sass())
     .pipe(autoprefixer())
+    .pipe(gulp.dest(cssOutput))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(minifycss())
     .pipe(gulp.dest(cssOutput));
+    gutil.log('CSS Changes Updated!');
 });
 
 gulp.task('html', function() {
     return gulp.src(htmlInput)
-        .pipe(gulp.dest('dist'));
+       .pipe(gulp.dest('dist'));
+       gutil.log('HTML Changes Updated!');
 });
 
 gulp.task('watch', function() {
-  return gulp
-    // Watch the input folder for change,
-    // and run `sass` task when something happens
-    .watch(cssInput, ['styles'])
-   // .watch(htmlInput, ['html'])
+  gulp.watch(htmlInput, ['html']);
+  
+  gulp.watch(cssInput, ['styles']);
+     // .watch(htmlInput, ['html'])
     // When there is a change,
     // log a message in the console
-    .on('change', function(event) {
+    gulp.on('change', function(event) {
       console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
 });
 
 
 
-gulp.task('default', ['styles', 'webserver', 'livereload', 'watch'], function() {
+gulp.task('default', ['styles', 'html', 'webserver', 'livereload', 'watch'], function() {
   return gutil.log('Gulp is running!')
 });

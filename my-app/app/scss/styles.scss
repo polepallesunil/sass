@@ -1,10 +1,14 @@
-$color: blue;
-$large: 2em;
+
+
+@import 'includes/_variables.scss';
+@import 'includes/_colors.scss';
 
 body {
-  background-color : $color;
+  background-color : $white;
   font-size:12px;
   border-radius: 4px;
-  color:#fff;
+  color:$largeColor;
+  transition:all .3s ease;
 }
-h1{font-size: $large;}
+h1{font-size: $fontLarge; color:$largeColor;}
+p{font-size:10px;}
