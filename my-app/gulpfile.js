@@ -4,8 +4,7 @@ var gulp = require('gulp');
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
-    gutil = require('gulp-util')
-    server = require('gulp-express'),
+    gutil = require('gulp-util'),
     livereload = require('gulp-livereload');
 
 
