@@ -1,6 +1,6 @@
 var gulp = require('gulp');
-	   webserver = require('gulp-webserver');
-	   sass = require('gulp-sass'),
+	  webserver = require('gulp-webserver');
+	  sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
@@ -9,7 +9,9 @@ var gulp = require('gulp');
 
 
 var tinylr;
-
+var cssInput = 'app/scss/*.scss';
+var cssOutput = 'dist/css';
+var htmlInput = 'app/*.html';
 
 gulp.task('livereload', function() {
   tinylr = require('tiny-lr')();
@@ -21,15 +23,10 @@ gulp.task('webserver', function() {
     .pipe(webserver({
       livereload: true,
       directoryListing: true,
-      open: true,
+      open: '/index.html',
 	    port: 4000
     }));
 });
-
-
-var cssInput = 'app/scss/*.scss';
-var cssOutput = 'dist/css';
-var htmlInput = 'app/*.html';
 
 gulp.task('styles', function () {
   return gulp
@@ -51,17 +48,11 @@ gulp.task('html', function() {
 
 gulp.task('watch', function() {
   gulp.watch(htmlInput, ['html']);
-  
   gulp.watch(cssInput, ['styles']);
-     // .watch(htmlInput, ['html'])
-    // When there is a change,
-    // log a message in the console
-    gulp.on('change', function(event) {
-      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
+  gulp.on('change', function(event) {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+  });
 });
-
-
 
 gulp.task('default', ['styles', 'html', 'webserver', 'livereload', 'watch'], function() {
   return gutil.log('Gulp is running!')
