@@ -1,3 +1,5 @@
 
 $largeColor: blue;
 $white : #fff;
+$brand-color: rgb(255,61,0);
+$accent-color: lighten($brand-color, 0); // That is, 10% darker than the brand-color.

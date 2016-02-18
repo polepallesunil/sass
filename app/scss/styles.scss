@@ -1,14 +1,78 @@
 
 
-@import 'includes/_variables.scss';
 @import 'includes/_colors.scss';
+@import 'includes/_variables.scss';
+@import 'includes/_functions.scss';
+
+@mixin default-type {
+	margin-bottom: 20px;
+	font-size: 14px;
+	line-height: 1.5;
+}
 
 body {
-  background-color : $white;
-  font-size:12px;
-  border-radius: 4px;
-  color:$largeColor;
-  transition:all .3s ease;
+    font-family: $body-font;    
+    padding:$default-padding;
+    background: $white;
+    @include default-type;
 }
-h1{font-size: $fontLarge; color:$largeColor;}
-p{font-size:10px;}
+
+pre{
+	border:1px solid #DEDEDE; 
+	padding:$default-padding;
+	border-radius: $default-padding;
+	background:#F0F0F0;
+	font-style: italic;
+	pre{border: 0 none; background: #F7F7F7;}
+	span{color:green;}
+}
+
+h1,h2,h3,h4 {
+    font-family: $header-font;
+}
+p{@include default-type;}
+ 
+section {
+	width: 100%;
+    h1 {
+        color:$white;
+    }
+}
+
+.container {width: $width - 2 * 10px;
+  margin: 0 auto;
+
+}
+
+$column-height:200px;
+.column {
+  background: #1abc9c;
+  height: $column-height;
+  display: block;
+  float: left;
+  width: getColumnWidth($container-width,$column-count,$margin);
+  margin: 10px $margin;
+}
+
+@mixin gradient($from, $to, $height) {
+    background-color: $to;   
+    background-image: linear-gradient($from, $to);
+    background-repeat: repeat-x; 
+    background-size: 100% $column-height;    
+}
+ 
+.gradient {
+    @include gradient(hsl(0, 80%, 50%), hsl(120, 80%, 50%), 30px);
+}
+ 
+.div1 {
+    @extend .gradient;
+    color:white;
+}
+ 
+.div2 {
+    @extend .gradient;
+    color: blue;
+@include default-type;
+
+}

@@ -9,7 +9,7 @@ var gulp = require('gulp');
 
 
 var tinylr;
-var cssInput = 'app/scss/*.scss';
+var cssInput = 'app/scss/**/*.scss';
 var cssOutput = 'dist/css';
 var htmlInput = 'app/*.html';
 
